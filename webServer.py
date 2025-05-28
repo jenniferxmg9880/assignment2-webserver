@@ -40,7 +40,7 @@ def webServer(port=13331):
 
 
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
- 
+      outputdata += b"\r\n"
       #Fill in end
                
       for i in f: #for line in file
@@ -50,8 +50,8 @@ def webServer(port=13331):
       #Send everything as one send command, do not send one line/item at a time!
 
       # Fill in start
-
-
+      connectionSocket.send(outputdata)
+      f.close
       # Fill in end
         
       connectionSocket.close() #closing the connection socket
@@ -60,13 +60,13 @@ def webServer(port=13331):
       # Send response message for invalid request due to the file not being found (404)
       # Remember the format you used in the try: block!
       #Fill in start
-
+      header = b"HTTP/1.1 404 Not Found\r\n"
       #Fill in end
 
-
+      connectionSocket.send(header)
       #Close client socket
       #Fill in start
-
+      connectionSocket.close()
       #Fill in end
 
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
