@@ -61,6 +61,9 @@ def webServer(port=13331):
       # Remember the format you used in the try: block!
       #Fill in start
       header = b"HTTP/1.1 404 Not Found\r\n"
+      header += b"Content-Type: text/html; charset=UTF-8\r\n"
+      header += b"\r\n"
+      header += b"<html><body><h1>404 Not Found</h1></body></html>"
       #Fill in end
 
       connectionSocket.send(header)
